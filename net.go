@@ -1,3 +1,5 @@
+//go:build ignore
+
 package main
 
 import (
@@ -19,7 +21,7 @@ func handleData(conn net.Conn) {
 	}
 }
 
-func init() {
+func main() {
 	lis, err := net.Listen("tcp", ":8888")
 	if err != nil {
 		log.Fatal(err)

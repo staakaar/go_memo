@@ -1,3 +1,5 @@
+//go:build ignore
+
 package main
 
 import (
@@ -5,7 +7,7 @@ import (
 	"os"
 )
 
-func init() {
+func main() {
 	f, err := os.Open("file.txt")
 	if err != nil {
 		return fmt.Errorf("cannot open file: %v", err)

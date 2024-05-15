@@ -1,3 +1,5 @@
+//go:build ignore
+
 package main
 
 import (
@@ -21,7 +23,7 @@ func f(ctx context.Context, wg *sync.WaitGroup) {
 	}
 }
 
-func init() {
+func main() {
 	var wg sync.WaitGroup
 	wg.Add(1)
 	ctx, cancel := context.WithTimeout(context.Background(), time.Duration(5*time.Second))
