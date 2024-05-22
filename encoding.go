@@ -42,7 +42,7 @@ func init() {
 	}
 	defer f.Close()
 
-	err := json.NewDecoder(f).Decode(&data)
+	err = json.NewDecoder(f).Decode(&data)
 	if err != nil {
 		log.Fatal(err)
 	}
