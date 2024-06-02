@@ -57,3 +57,10 @@ func main() {
 
 // ./実行ファイル -cpuprofile cpu.prof
 // CPUプロファイルの結果表示コマンド go tool pprof -top cpu.prof <= 生成されたプロファイル名
+
+// ./実行ファイル -memprofile mem.prof
+// go tool pprof -top mem.prof
+//　相関グラフの生成 go tool pprof =png cpu.prof > out.png ※graphvisのdotコマンドが必要
+
+// フレームグラフが必要な場合 go tool pprof -http=:8080 cpu.prof
+
