@@ -229,3 +229,118 @@ func init() {
 }
 
 ```
+
+### 端末制御用ライブラリ
+
+### olekukonko/tablewriter
+
+```go
+package main
+
+import (
+    "os"
+    "github.com/olekukonko/tablewriter"
+)
+
+func main() {
+    data := [][]string{
+        {"A","The Good", "500"},
+        {"B","The Very very Bad Man", "288"},
+        {"C","The Ugly", "120"},
+        {"D","The Gopher", "800"},
+    }
+
+    table := tablewriter.NewWriter(os.Stdout)
+    table.SetHeader([]string{"Name", "Sign", "Rating"})
+    table.SetColumnAlignment([]int{
+        tablewriter.ALIGN_CENTER,
+        tablewriter.ALIGN_DEFAULT,
+        tablewriter.ALIGN_DEFAULT,
+    })
+
+    table.SetHeaderColor(
+        tablewriter.Colors{tablewriter.Bold, tablewriter.BgGreenColor},
+        tablewriter.COlors{tablewriter.FgHiRedColor, tablewriter.Bold, tablewriter.BgBlackColor},
+        tablewriter.COlors{tablewriter.BgRedColor, tablewriter.FgWhiteColor},
+    )
+
+    table.SetFooterAlignment(tablewriter.ALIGN_RIGHT)
+    table.SetFooter([]string{"","","427.0"})
+
+    for _, v := range data {
+        table.Append(v)
+    }
+    table.Render()
+}
+```
+
+### mattn/go-runewidth
+
+```go
+package main
+
+import (
+    "fmt"
+    "strings"
+
+    "github.com/mattn/go-runewidth"
+)
+
+func main() {
+
+    s := "Go言語でCLIアプリケーション作成"
+    fmt.Println(s)
+    width := runewidth.StringWidth(s)
+    fmt.Println(strings.Repeat("~", width))
+
+    fmt.Println(runewidth.Wrap(s, 11))
+}
+```
+
+### jroimartin/gocui
+
+```go
+package main
+
+import (
+    "fmt"
+    "log"
+    "github.com/jroimartin/gocui"
+)
+
+func main() {
+    g, err := gocui.NewGui(gocui.OutputNormal)
+    if err != nil {
+        log.Panicln(err)
+    }
+    defer g.Close()
+
+    g.ASCII = true
+    g.SetManagerFunc(layout)
+
+    if err := g.SetKeybinding("", gocui.KeyCtrlC, gocui.ModNone, quit); err != nil {
+        log.Panicln(err)
+    }
+
+    if err := g.MainLopp(); err != nil && err != gocui.ErrQuit {
+        log.Panicln(err)
+    }
+}
+
+func layout(g *gocui.Gui) error {
+    s := `Go is an open source programming language that makes it simple to build secure, scalable systems.`
+    maxX, maxY := g.Size()
+
+    if v, err := g.SetView("hello", maxX/2-21, maxY.2-2, maxX/2+21, maxY/2+2); err != nil {
+        if err != gocui.ErrUnknownView {
+            return err
+        }
+        fmt.Fprintln(v, s)
+    }
+    return nil
+}
+
+func quit(g *gogui.Gui, v *gocui.View) error {
+    return gocui.ErrQuit
+}
+```
