@@ -85,3 +85,8 @@ go test -count 5 -benchmem -bench . 2>&1 | tee new.log
 ```shell
 benchstat old.log new.log
 ```
+
+## HTTP通信ベンチマークに必要なツール
+
+### https://github.com/ddosify/ddosify
+### https://github.com/rakyll/hey
