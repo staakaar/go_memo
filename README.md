@@ -344,3 +344,12 @@ func quit(g *gogui.Gui, v *gocui.View) error {
     return gocui.ErrQuit
 }
 ```
+
+## godoc
+
+### インストール
+```zsh
+$ go install golang.org/x/tools/cmd/godoc@latest
+$ godoc
+# http://localhost:6060でgodocが閲覧可能
+```
